@@ -1,6 +1,7 @@
 {
   "name": "mallikarjuna-s-portfolio",
   "private": true,
+  "homepage": "https://mallikarjunadanduba.github.io/Portfolio",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
