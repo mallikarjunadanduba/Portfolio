@@ -23,38 +23,63 @@ const Navbar = ({ sectionRefs, activeItem }) => {
 
   const handleNavClick = (item) => {
     const ref = sectionRefs[item];
-    if (ref && ref.current) {
+    if (ref?.current) {
       ref.current.scrollIntoView({ behavior: 'smooth' });
     }
-    setMobileOpen(false); // Close drawer after navigation
+    setMobileOpen(false);
   };
 
   const navItems = ['Home', 'About', 'Services', 'Skills', 'Projects'];
 
   const drawer = (
-    <Box onClick={() => setMobileOpen(false)} sx={{ textAlign: 'center' }}>
+    <Box
+      sx={{
+        textAlign: 'center',
+        mt: 2,
+        px: 2,
+        width: '100%',
+        boxSizing: 'border-box',
+      }}
+    >
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton
-              onClick={() => handleNavClick(item)}
-              sx={{ textAlign: 'center' }}
-            >
+            <ListItemButton onClick={() => handleNavClick(item)}>
               <ListItemText
                 primary={item}
-                sx={{ color: activeItem === item ? '#FF0050' : '#B0B0B0' }}
+                sx={{
+                  textAlign: 'center',
+                  color: activeItem === item ? '#FF0050' : '#B0B0B0',
+                }}
               />
             </ListItemButton>
           </ListItem>
         ))}
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => handleNavClick('Contact Me')}>
+            <ListItemText
+              primary="Contact Me"
+              sx={{ textAlign: 'center', color: '#FF0050' }}
+            />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <AppBar component="nav" sx={{ backgroundColor: '#1E1E1E', boxShadow: 'none' }}>
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
+    <Box sx={{ width: '100%', position: 'fixed', top: 0, zIndex: 1300 }}>
+      <AppBar
+        component="nav"
+        position="static"
+        sx={{
+          backgroundColor: '#1E1E1E',
+          boxShadow: 'none',
+          width: '100%',
+        }}
+      >
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          {/* Left side: Brand */}
           <Typography
             variant="h6"
             component="div"
@@ -64,13 +89,17 @@ const Navbar = ({ sectionRefs, activeItem }) => {
               color: '#fff',
               display: 'flex',
               alignItems: 'center',
-              flexGrow: { xs: 1, sm: 0 },
             }}
           >
-            <Box component="span" sx={{ color: '#FF0050', mr: 0.5 }}>Mallikarjun</Box>
-            <Box component="span" sx={{ color: '#ccc' }}>Danduba</Box>
+            <Box component="span" sx={{ color: '#FF0050', mr: 0.5 }}>
+              Mallikarjun
+            </Box>
+            <Box component="span" sx={{ color: '#ccc' }}>
+              Danduba
+            </Box>
           </Typography>
 
+          {/* Right side for desktop */}
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 3 }}>
             {navItems.map((item) => (
               <Button
@@ -103,18 +132,20 @@ const Navbar = ({ sectionRefs, activeItem }) => {
             </Button>
           </Box>
 
+          {/* Hamburger icon for mobile */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="end"
             onClick={handleDrawerToggle}
-            sx={{ ml: 2, display: { sm: 'none' } }}
+            sx={{ display: { sm: 'none' } }}
           >
             <MenuIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
 
+      {/* Mobile drawer */}
       <Drawer
         anchor="right"
         open={mobileOpen}
@@ -125,7 +156,10 @@ const Navbar = ({ sectionRefs, activeItem }) => {
           '& .MuiDrawer-paper': {
             backgroundColor: '#1E1E1E',
             color: '#fff',
-            width: 240,
+            width: '80vw',
+            maxWidth: 280,
+            boxSizing: 'border-box',
+            overflowX: 'hidden',
           },
         }}
       >
@@ -136,4 +170,3 @@ const Navbar = ({ sectionRefs, activeItem }) => {
 };
 
 export default Navbar;
-

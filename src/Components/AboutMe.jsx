@@ -46,7 +46,7 @@ const AboutMe = () => {
                             display: 'flex',
                             flexDirection: { xs: 'column', md: 'row' },
                             alignItems: 'flex-start',
-                            justifyContent: 'space-between',
+                            justifyContent: 'space-evenly',
                             gap: { xs: 3, md: 3 },
                         }}
                     >

@@ -88,7 +88,6 @@ const ContactMe = () => {
     <Box
       sx={{
         width: "100%",
-        maxWidth: "1400px", // adjust as needed
         mx: "auto",
         backgroundColor: "#1E1E1E",
         color: "#fff",

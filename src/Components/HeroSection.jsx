@@ -75,7 +75,7 @@ const HeroSection = ({ sectionRefs }) => {
         container
         alignItems="center"
         spacing={{ xs: 2, md: 1 }}
-        justifyContent="space-between"
+        justifyContent="space-evenly"
         sx={{ width: '100%', margin: 0 }}
       >
         {/* RIGHT - IMAGE */}
@@ -89,7 +89,7 @@ const HeroSection = ({ sectionRefs }) => {
             justifyContent: { xs: 'center', md: 'flex-end' },
             pr: { md: 4, lg: 8 },
             mt: { xs: 2, md: 0 },
-            ml: { xs: 6.8, md: 0 },
+            ml: { xs: 0, md: 0 },
           }}
         >
           <MotionDiv
@@ -99,8 +99,8 @@ const HeroSection = ({ sectionRefs }) => {
           >
             <Box
               sx={{
-                width: { xs: 260, sm: 300, md: 350, lg: 380 },
-                height: { xs: 260, sm: 300, md: 350, lg: 380 },
+                width: { xs: 260, sm: 300, md: 350, lg: 450 },
+                height: { xs: 260, sm: 300, md: 350, lg: 450 },
                 border: '5px solid #FF0050',
                 borderRadius: '50%',
                 overflow: 'hidden',

@@ -38,10 +38,10 @@ const LandingPage = () => {
     const observerOptions = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.6,
+      threshold: 0.3, // Changed from 0.6 to 0.3 for better detection
     };
 
-    const observer = new IntersectionObserver((entries) => {
+    const observerCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const visibleSection = Object.keys(sectionRefs).find(
@@ -52,7 +52,9 @@ const LandingPage = () => {
           }
         }
       });
-    }, observerOptions);
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
 
     Object.values(sectionRefs).forEach((ref) => {
       if (ref.current) observer.observe(ref.current);
@@ -63,19 +65,23 @@ const LandingPage = () => {
         if (ref.current) observer.unobserve(ref.current);
       });
     };
-  },);
+  }, []); // ✅ Added missing empty dependency array
 
   return (
     <>
-      <Navbar sectionRefs={sectionRefs} activeItem={activeItem} />
-      <div ref={homeRef}>
-        <HeroSection sectionRefs={sectionRefs} />
-      </div>
+      <Navbar sectionRefs={sectionRefs} activeItem={activeItem} handleNavClick={handleNavClick} />
+      
+      <div ref={homeRef}><HeroSection sectionRefs={sectionRefs} /></div>
       <div ref={aboutRef}><AboutMe /></div>
       <div ref={servicesRef}><Services /></div>
       <div ref={skillsRef}><Skills /></div>
-      <div ref={projectsRef}><ProjectShowcase/></div>
+      
+      <div ref={projectsRef} style={{ minHeight: '100vh' }}> {/* ensures enough space to trigger observer */}
+        <ProjectShowcase />
+      </div>
+      
       <div ref={contactRef}><ContactMe /></div>
+
       <Footer sectionRefs={sectionRefs} activeItem={activeItem} handleNavClick={handleNavClick} />
     </>
   );
